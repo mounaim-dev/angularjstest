@@ -44,7 +44,7 @@ myApp.controller("myController", function ($scope, $http) {
     
 	$scope.updateUser = function(data){
 		
-        confirm("Are You Sure You Want TO Update Employee Id :" + data.id);
+        confirm("Are You Sure You Want TO Update user Id :" + data.id);
          
         console.log(data);
         
@@ -56,42 +56,6 @@ myApp.controller("myController", function ($scope, $http) {
 	};
     
     
-    
-    // // //Insert  user Using empService
-    //     $scope.EmpInsert = function () {
-    
-    //         alert(Employee.Id);
-    //         empService.insert($scope.Employee).then(function () {
-    
-    //             EmpList()
-               
-    //             $scope.Employee = {Id:100,Name: "", Gender: "", Salary: "" };
-    
-    //             alert("Success");
-               
-    //         }, function () { alert("Failed"); })
-    //     }
-    
-    
-    
-    
-    
-    
-    // // //users Insert Service
-    
-    
-    // // //Serves For Insert Data in Datbase  Using WebAPI   Code Strats Here----------------------------------
-    // app.factory("UserService", function ($http) {
-    //     empService = {};
-    //     empService.insert = function (formdata) {
-    //         return $http.post('//60546e3dd4d9dc001726d23e.mockapi.io/users', formdata)
-    //     }
-    //     return UserService;
-    // }
-
-
-
-
 
 
 	 $scope.newUser = {};
