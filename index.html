@@ -1,0 +1,186 @@
+﻿<!doctype html>
+<html>
+<head>
+    
+    <title>Gestion des Utilisateurs</title>  
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js" integrity="sha512-7oYXeK0OxTFxndh0erL8FsjGvrl2VMDor6fVqzlLGfwOQQqTbYsGPv4ZZ15QHfSk80doyaM0ZJdvkyDcVO7KFA==" crossorigin="anonymous"></script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous"></script>
+</head>
+
+
+<body ng-app="myApp" ng-controller="myController">
+<div class="container">  		
+	<hr>
+	<button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">Ajouter un nouveau utilisateur</button>
+	<h2>Tous les utilisateurs</h2>
+		<div class="clearfix"></div>
+		<hr>
+		
+		<div class="alert alert-info alert-dismissible" role="alert" ng-if="info">
+	  <button type="button" class="close" aria-label="Close"><span aria-hidden="true" ng-click="clearInfo()">&times;</span></button>
+	  {{info}}
+	</div>
+		<table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <th>Nom</th>
+	        <th>Prénom</th>
+	        <th>email</th>
+	        <th>Edit</th>
+	        <th>Delete</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr ng-repeat="user in UserData">
+	        <td> {{user.lastName }}.</td>
+	        <td> {{user.firstName}} </td>
+	        <td>{{user.email}}</td>
+	        <td> <button class="btn btn-info btn-sm"  type="button" data-toggle="modal" data-target="#myModalEdit" ng-click="selectUser(user)">Edit</button> </td>
+	        <td> <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete" ng-click="selectUser(user)">Delete</button> </td>
+	      </tr>		      
+	    </tbody>
+	  </table>
+	</div>    
+
+
+
+
+ <!-- Trigger the modal with a button -->
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Ajouter un nouveau utilisateur</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">Nom</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputEmail3" placeholder="Username" ng-model="newUser.username">
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">Prénom</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputEmail3" placeholder="Email" ng-model="newUser.email">
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputEmail3" placeholder="Full Name" ng-model="newUser.fullName">
+		    </div>
+		  </div>
+		  			  
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveUser(newUser);">enregistrer</button>
+		    </div>
+		  </div>
+		</form>
+      </div>
+      <div class="modal-footer">
+      	
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div id="myModalEdit" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modifier l'utilisateur</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">Nom</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="Nomupdate" placeholder="nom" ng-model="clickedUser.lastName">
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">Prénom</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="prenomupdate" placeholder="prenom" ng-model="clickedUser.firstName">
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">Mail</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="emailupdate" placeholder="email" ng-model="clickedUser.email">
+		    </div>
+		  </div>
+		  			  
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="updateUser(clickedUser);">Valider</button>
+		    </div>
+		  </div>
+		</form>
+      </div>
+      <div class="modal-footer">
+      	
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="myModalDelete" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">etes-vous sur?</h4>
+      </div>
+      <div class="modal-body">
+        <h3 style="color: red">Vous etes sur le point de supprimer "{{clickedUser.firstName}} {{clickedUser.lastName}}". Toutes les informations seront perdues. </h3>
+        <br/>
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="deleteUser(clickedUser.id)">Yes</button>	      	
+        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">No</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+<script src="js/app.js"></script>
+
+</html>
