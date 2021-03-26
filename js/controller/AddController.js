@@ -1,20 +1,18 @@
-myApp.controller("AddController", function ($scope, $http) {
+myApp.controller("AddController", function ($scope, UserDataop) {
 
 	 $scope.newUser = {};
-	 $scope.info = "";
+	 
 
 
 
 
-	$scope.saveUser = function(data){
+	$scope.saveUser = function addUser(data){
         
         
 
-        $http.post('https://60546e3dd4d9dc001726d23e.mockapi.io/users/', data).then(function () 
+        UserDataop.addUsers(data).then(function () 
          { 
-        
-         location.reload(); 
-         
+         $scope.loading = true; 
          $scope.info = "Nouveau User ajouté avec succés";
          
         }, function (response) {
